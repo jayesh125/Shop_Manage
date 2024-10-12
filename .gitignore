@@ -1,0 +1,6 @@
+my_venv/
+db.sqlite3
+*/migrations/*.py
+*/migrations/*.pyc
+.vscode/
+settings.py
