@@ -5,6 +5,7 @@ from .models import Product, Category
 from .serializers import ProductSerializer, CategorySerializer
 from rest_framework.filters import SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
+from shop_manage.renders import UserRenderer
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
@@ -12,7 +13,8 @@ class CategoryViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     filter_backends = [DjangoFilterBackend, SearchFilter]
     filterset_fields = ['name', 'parent_category']
-    search_fields = ['name']  # Search by name
+    search_fields = ['name']
+    renderer_classes = [UserRenderer]
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
@@ -31,10 +33,11 @@ class ProductViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend, SearchFilter]
     filterset_fields = ['name', 'category', 'price']
     search_fields = ['name', 'description']
+    renderer_classes = [UserRenderer]
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
-        
+
     def get_queryset(self):
         user = self.request.user
         queryset = Product.objects.filter(user=user)

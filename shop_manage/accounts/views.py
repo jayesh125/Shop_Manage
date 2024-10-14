@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework.renderers import JSONRenderer
+from shop_manage.renders import UserRenderer
 
 # Function to generate JWT tokens
 def get_tokens_for_user(user):
@@ -19,7 +19,7 @@ def get_tokens_for_user(user):
 
 class UserView(APIView):
     serializer_class = UserSerializer
-    renderer_classes = [JSONRenderer]
+    renderer_classes = [UserRenderer]
 
     def get_permissions(self):
         if self.request.method == 'POST':
@@ -72,6 +72,7 @@ class UserView(APIView):
 
 class LoginView(APIView):
     permission_classes = [AllowAny]
+    renderer_classes = [UserRenderer]
 
     def post(self, request):
         email = request.data.get('email')
