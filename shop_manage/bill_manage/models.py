@@ -39,7 +39,6 @@ class BillProduct(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
     price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    gst_applicable = models.BooleanField(default=True)
 
     def __str__(self):
         return f"{self.product.name} x {self.quantity} in Bill {self.bill.bill_number}"

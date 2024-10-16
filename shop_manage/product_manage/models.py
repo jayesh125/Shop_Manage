@@ -25,6 +25,7 @@ class Product(models.Model):
     gst_applicable = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    low_stock_threshold = models.PositiveIntegerField(default=10)
 
     def __str__(self):
         return self.name

@@ -7,4 +7,4 @@ class BillAdmin(admin.ModelAdmin):
 
 @admin.register(BillProduct)
 class BillProductAdmin(admin.ModelAdmin):
-    list_display = ('bill', 'product', 'quantity', 'price', 'gst_applicable')
+    list_display = ('bill', 'product', 'quantity', 'price')
